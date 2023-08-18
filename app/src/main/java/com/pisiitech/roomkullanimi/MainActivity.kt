@@ -47,7 +47,10 @@ fun Sayfa() {
         //guncelle(vt)
         //sil(vt)
         //tumKisiler(vt)
-        rastgele(vt)
+        //rastgele(vt)
+        //ara(vt)
+        //getir(vt)
+        kontrol(vt)
     }
 }
 
@@ -97,6 +100,35 @@ fun rastgele(vt: Veritabani) {
     }
 }
 
+fun ara(vt: Veritabani) {
+    val job: Job = CoroutineScope(Dispatchers.Main).launch {
+        val liste = vt.kisilerDao().kisiArama("et")
+
+        for (k in liste) {
+            Log.e("Kisi  Bilgi", "********************")
+            Log.e("Kisi id", k.kisi_id.toString())
+            Log.e("Kisi ad", k.kisi_ad)
+            Log.e("Kisi tel", k.kisi_tel)
+        }
+    }
+}
+fun getir(vt: Veritabani) {
+    val job: Job = CoroutineScope(Dispatchers.Main).launch {
+        val kisi = vt.kisilerDao().kisiGetir(1)
+
+            Log.e("Kisi id", kisi.kisi_id.toString())
+            Log.e("Kisi ad", kisi.kisi_ad)
+            Log.e("Kisi tel", kisi.kisi_tel)
+    }
+}
+
+fun kontrol(vt: Veritabani) {
+    val job: Job = CoroutineScope(Dispatchers.Main).launch {
+        val sonuc = vt.kisilerDao().kayitKontrol("Ahmet")
+
+        Log.e("Kisi sonuc", sonuc.toString())
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
